@@ -1,0 +1,12 @@
+<mat-card>
+<mat-form-field class="example-full-width">
+  <textarea rows="20"  matInput [(ngModel)]="enteredValue" 
+  placeholder="Start wrting your post here......">
+  </textarea>
+</mat-form-field>
+<br>
+<br>
+<button mat-raised-button color="primary" (click)="onSavePost()">Save Post</button>
+</mat-card>
+
+<p>{{ enteredValue }}</p>
