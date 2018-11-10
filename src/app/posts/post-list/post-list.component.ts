@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Post } from '../post.model';
 
 @Component({
   selector: 'app-post-list',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PostListComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
-  @Input('posts') postList = [];
+  @Input('posts') postList: Post[] = [];
 
   constructor() { }
 

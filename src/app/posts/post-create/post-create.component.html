@@ -1,14 +1,31 @@
 <mat-card>
+<form (ngSubmit) = "onSavePost(postForm)" #postForm = "ngForm">
 
   <mat-form-field>
-    <input matInput type="text" id="postTitle" [(ngModel)]="enteredTitle" placeholder="Title">
+    <input
+    matInput 
+    type="text" 
+    name="postTitle"
+    #postTitle = "ngModel"
+    id="postTitle"
+    ngModel
+    placeholder="Title"
+    required>
   </mat-form-field>
 
+
   <mat-form-field>
-    <textarea matInput rows="20" matInput [(ngModel)]="enteredContent" placeholder="Start wrting your post here......">
+    <textarea
+    matInput
+    rows="20"
+    #postContent = "ngModel"
+    name="postContent"
+    ngModel
+    placeholder="Start wrting your post here......"
+    required>
   </textarea>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="onSavePost()">Save Post</button>
-
+  <button type="submit"  mat-raised-button color="primary">Save Post</button>
+</form>
 </mat-card>
