@@ -2,6 +2,8 @@
     <app-header></app-header>
 </header>
 <main>
-    <app-post-create></app-post-create>
+    <app-post-create (postCreated)="onPostCreated($event)"></app-post-create>
+    <br>
+    <app-post-list class = "post-list" [posts] = "postList" ></app-post-list>
 </main>
 

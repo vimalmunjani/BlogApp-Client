@@ -1,5 +1,4 @@
 mat-card {
-    width: 90%;
     margin: auto;
     /* height: 80%; */
     padding: 5%;
@@ -7,10 +6,11 @@ mat-card {
 }
 
 mat-form-field {
-    width: 90%;
-    margin: 0%;
-    padding: 0%;
-    margin: auto;
+    display: block;
+    width: 95%;
+    margin: 0% auto;
+    /* padding: 2%; */
+    
 }
  textarea {
     /* width: 60%; */
@@ -19,5 +19,9 @@ mat-form-field {
 }
 
 button {
-    
+    margin-top: 2%;
+}
+
+#postTitle {
+    font-size: 2rem;
 }

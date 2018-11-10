@@ -1,3 +1,19 @@
-<p>
-  post-list works!
-</p>
+<mat-accordion *ngIf="postList.length > 0; else noPosts">
+  <mat-expansion-panel *ngFor=" let post of postList">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       <h3> {{ post.title }} </h3> 
+      </mat-panel-title>
+      <!-- <mat-panel-description>
+        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    {{ post.content }}
+  </mat-expansion-panel>
+</mat-accordion>
+
+<ng-template #noPosts>
+  <p class = "body-1">
+    No Posts yet!
+  </p>
+</ng-template>
