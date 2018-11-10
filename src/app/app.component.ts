@@ -7,7 +7,7 @@ import { Post } from './posts/post.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'BlogApp-Client';
+  title = 'Blog';
   postList: Post[] = [];
 
   onPostCreated(newPost) {
