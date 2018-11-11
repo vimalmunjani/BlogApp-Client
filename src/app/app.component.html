@@ -2,8 +2,15 @@
     <app-header></app-header>
 </header>
 <main>
-    <app-post-create (postCreated)="onPostCreated($event)"></app-post-create>
+    <!-- old implementation -- Event based -->
+    <!-- <app-post-create (postCreated)="onPostCreated($event)"></app-post-create>
     <br>
-    <app-post-list class = "post-list" [posts] = "postList" ></app-post-list>
+    <app-post-list class = "post-list" [posts] = "postList" ></app-post-list> -->
+
+    <!-- new implementation -- service based -->
+    <app-post-create></app-post-create>
+    <br>
+    <app-post-list></app-post-list>
+
 </main>
 

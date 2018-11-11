@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Post } from '../post.model';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { PostsService } from '../posts.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class PostCreateComponent implements OnInit {
   @Output()
   postCreated = new EventEmitter<Post>();
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar,
+    private postsService: PostsService) { }
 
   ngOnInit() {
   }
@@ -22,7 +24,7 @@ export class PostCreateComponent implements OnInit {
   onSavePost(form: NgForm) {
 
     if (form.invalid) {
-      this.snackBar.open('Missing Fields', 'OK', {
+      this.snackBar.open('Enter Required Fields', 'OK', {
         duration: 2000,
       });
       return;
@@ -33,7 +35,9 @@ export class PostCreateComponent implements OnInit {
       content: form.value.postContent
     };
 
-    this.postCreated.emit(newPost);
+    this.postsService.addPost(newPost);
+    form.resetForm();
+    // this.postCreated.emit(newPost);
 
   }
 
