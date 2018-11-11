@@ -10,6 +10,7 @@ import { MatButtonModule, MatInputModule,
   MatCardModule, MatToolbarModule, MatExpansionModule, MatSnackBarModule, } from '@angular/material';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     MatCardModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
