@@ -13,13 +13,13 @@ export class PostListComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   // @Input('posts') postList: Post[] = [];
   postList: Post[] = [];
-  private postsSub: Subscription;
+  postsSub: Subscription;
 
   constructor(private postsService: PostsService) { }
 
   ngOnInit() {
     this.postsService.getPosts();
-    this.postsService.getUpdatedPosts().subscribe((posts: Post[]) => {
+    this.postsSub = this.postsService.getUpdatedPosts().subscribe((posts: Post[]) => {
       this.postList = posts;
     });
   }
