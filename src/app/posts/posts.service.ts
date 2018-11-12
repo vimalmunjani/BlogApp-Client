@@ -35,4 +35,19 @@ export class PostsService {
     // this.postList.push(post);
     // this.updatedPosts.next([...this.postList]);
   }
+
+  deletePost(postId: string) {
+    this.http.delete<{ status: number, message: string, data: Post[]}>(`http://localhost:3000/api/post/${postId}`).subscribe(res => {
+
+    if (res.status === 200) {
+      const filteredPosts = this.postList.filter((p) => p._id !== postId);
+      this.postList = filteredPosts;
+      this.updatedPosts.next([...this.postList]);
+      return;
+    } else {
+      console.log('error occured deleting post');
+    }
+
+    });
+  }
 }

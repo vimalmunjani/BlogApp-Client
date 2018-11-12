@@ -31,6 +31,7 @@ export class PostCreateComponent implements OnInit {
     }
 
     const newPost: Post = {
+      _id: '',
       title: form.value.postTitle,
       content: form.value.postContent
     };

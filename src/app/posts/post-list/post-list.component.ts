@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent implements OnInit,OnDestroy {
+export class PostListComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line:no-input-rename
   // @Input('posts') postList: Post[] = [];
@@ -22,6 +22,10 @@ export class PostListComponent implements OnInit,OnDestroy {
     this.postsService.getUpdatedPosts().subscribe((posts: Post[]) => {
       this.postList = posts;
     });
+  }
+
+  deletePost(postId: string) {
+    this.postsService.deletePost(postId);
   }
 
   ngOnDestroy() {
