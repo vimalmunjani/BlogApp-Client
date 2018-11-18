@@ -1,6 +1,12 @@
 <mat-toolbar color="primary">
-    <span> <a [routerLink] = "['']"> MyBlog </a> </span>
-    <ul>
-        <li> <a [routerLink] = "['create']"> Write New Post </a> </li>
-    </ul>
+  <span>
+    <button [routerLink]="['']" mat-flat-button color="primary">MyBlog</button>
+    <!-- <a [routerLink] = "['']"> MyBlog </a>  -->
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <button mat-button [routerLink]="['create']" 
+    routerLinkActive = "mat-accent" >Write New Post</button>
+    <!-- <li> <a [routerLink] = "['create']"> Write New Post </a> </li> -->
+  </ul>
 </mat-toolbar>

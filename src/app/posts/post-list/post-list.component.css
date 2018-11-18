@@ -1,3 +1,9 @@
 .body-1 {
     text-align: center;
+    color: darkslategray;
+}
+
+mat-spinner {
+    margin: 0 auto;
+    
 }
