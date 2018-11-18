@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Post } from '../post.model';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { PostsService } from '../posts.service';
 import { Router } from '@angular/router';
@@ -16,18 +16,25 @@ export class PostCreateComponent implements OnInit {
   // @Output()
   // postCreated = new EventEmitter<Post>();
   isLoading = false;
+  form: FormGroup;
 
   constructor(private snackBar: MatSnackBar,
     private postsService: PostsService,
     private router: Router) { }
 
   ngOnInit() {
+
+    this.form = new FormGroup({
+      title: new FormControl(null, { validators: [ Validators.required, Validators.min(3)]}),
+      content: new FormControl(null, { validators: [ Validators.required ]}),
+      image: new FormControl()
+    });
+
   }
 
-  onSavePost(form: NgForm) {
+  onSavePost() {
 
-    
-    if (form.invalid) {
+    if (this.form.invalid) {
       this.snackBar.open('Enter Required Fields', 'OK', {
         duration: 2000,
       });
@@ -36,10 +43,10 @@ export class PostCreateComponent implements OnInit {
 
     const newPost: Post = {
       _id: '',
-      title: form.value.postTitle,
-      content: form.value.postContent
+      title: this.form.value.title,
+      content: this.form.value.content
     };
-    
+
     this.isLoading = true;
     this.postsService.addPost(newPost).subscribe((res) => {
       if (res.status === 201) {
@@ -55,7 +62,7 @@ export class PostCreateComponent implements OnInit {
       }
     });
 
-    form.resetForm();
+    this.form.reset();
     // this.postCreated.emit(newPost);
 
   }

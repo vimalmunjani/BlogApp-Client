@@ -1,15 +1,30 @@
 <mat-card>
     <mat-spinner *ngIf = " isLoading " ></mat-spinner>
-<form *ngIf = " !isLoading "(ngSubmit) = "onSavePost(postForm)" #postForm = "ngForm">
+<form [formGroup] = "form" *ngIf = " !isLoading " (submit) = "onSavePost()">
+
+    <div class = "imageContainer">
+        <img mat-card-image src="https://images.pexels.com/photos/36753/flower-purple-lical-blosso.jpg?cs=srgb&dl=bloom-blooming-blossom-36753.jpg&fm=jpg" alt="Photo of a Shiba Inu">
+        <button class = "filePickerButton" type = "button" 
+        mat-stroked-button color="accent"
+        (click) = "fileChooser.click()"  >Choose Image</button>
+    </div>
+
+    <input class = "fileChooser" type="file" #fileChooser>
+      
+  <!-- <div class = "imageContainer">
+    <img class = "imagePreview" src="https://images.pexels.com/photos/36753/flower-purple-lical-blosso.jpg?auto=compress&cs=tinysrgb&h=650&w=940" alt="">
+    
+  </div>
+
+  <button class = "filePickerButton" type = "button" 
+    mat-stroked-button color="primary">Primary</button> -->
 
   <mat-form-field>
     <input
     matInput 
     type="text" 
-    name="postTitle"
-    #postTitle = "ngModel"
+    formControlName = "title"
     id="postTitle"
-    ngModel
     placeholder="Title"
     required>
   </mat-form-field>
@@ -19,14 +34,53 @@
     <textarea
     matInput
     rows="20"
-    #postContent = "ngModel"
+    formControlName = "content"
     name="postContent"
-    ngModel
     placeholder="Start wrting your post here......"
     required>
   </textarea>
   </mat-form-field>
 
-  <button type="submit"  mat-raised-button color="accent">Save Post</button>
+  <button type="submit" mat-raised-button color="accent">Save Post</button>
 </form>
 </mat-card>
+
+
+
+
+
+
+
+<!-- 
+<mat-card>
+  <mat-spinner *ngIf = " isLoading " ></mat-spinner>
+<form *ngIf = " !isLoading "(ngSubmit) = "onSavePost(postForm)" #postForm = "ngForm">
+
+<mat-form-field>
+  <input
+  matInput 
+  type="text" 
+  name="postTitle"
+  #postTitle = "ngModel"
+  id="postTitle"
+  ngModel
+  placeholder="Title"
+  required>
+</mat-form-field>
+
+
+<mat-form-field>
+  <textarea
+  matInput
+  rows="20"
+  #postContent = "ngModel"
+  name="postContent"
+  ngModel
+  placeholder="Start wrting your post here......"
+  required>
+</textarea>
+</mat-form-field>
+
+<button type="submit"  mat-raised-button color="accent">Save Post</button>
+</form>
+</mat-card> -->
