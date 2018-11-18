@@ -1,23 +1,19 @@
 <mat-card>
-    <mat-spinner *ngIf = " isLoading " ></mat-spinner>
-<form [formGroup] = "form" *ngIf = " !isLoading " (submit) = "onSavePost()">
+<mat-spinner *ngIf = " isLoading " ></mat-spinner>
+  <form [formGroup] = "form" *ngIf = " !isLoading " (submit) = "onSavePost()">
 
-    <div class = "imageContainer">
-        <img mat-card-image src="https://images.pexels.com/photos/36753/flower-purple-lical-blosso.jpg?cs=srgb&dl=bloom-blooming-blossom-36753.jpg&fm=jpg" alt="Photo of a Shiba Inu">
-        <button class = "filePickerButton" type = "button" 
-        mat-stroked-button color="accent"
-        (click) = "fileChooser.click()"  >Choose Image</button>
-    </div>
+  <div class="imageContainer">
 
-    <input class = "fileChooser" type="file" #fileChooser>
-      
-  <!-- <div class = "imageContainer">
-    <img class = "imagePreview" src="https://images.pexels.com/photos/36753/flower-purple-lical-blosso.jpg?auto=compress&cs=tinysrgb&h=650&w=940" alt="">
-    
+  <img mat-card-image 
+  [src]="imagePreview"
+  alt="">
+
+  <button class="filePickerButton" type="button" mat-stroked-button color="accent"
+  (click)="fileChooser.click()">Choose Image</button>
+
   </div>
 
-  <button class = "filePickerButton" type = "button" 
-    mat-stroked-button color="primary">Primary</button> -->
+  <input class = "fileChooser" type="file" #fileChooser (change) = "onFileSelected($event)" >
 
   <mat-form-field>
     <input
@@ -28,7 +24,6 @@
     placeholder="Title"
     required>
   </mat-form-field>
-
 
   <mat-form-field>
     <textarea
@@ -42,14 +37,8 @@
   </mat-form-field>
 
   <button type="submit" mat-raised-button color="accent">Save Post</button>
-</form>
+  </form>
 </mat-card>
-
-
-
-
-
-
 
 <!-- 
 <mat-card>

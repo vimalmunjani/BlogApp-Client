@@ -17,6 +17,7 @@ export class PostCreateComponent implements OnInit {
   // postCreated = new EventEmitter<Post>();
   isLoading = false;
   form: FormGroup;
+  imagePreview;
 
   constructor(private snackBar: MatSnackBar,
     private postsService: PostsService,
@@ -25,10 +26,28 @@ export class PostCreateComponent implements OnInit {
   ngOnInit() {
 
     this.form = new FormGroup({
-      title: new FormControl(null, { validators: [ Validators.required, Validators.min(3)]}),
+      title: new FormControl(null, { validators: [ Validators.required]}),
       content: new FormControl(null, { validators: [ Validators.required ]}),
-      image: new FormControl()
+      image: new FormControl(null, { validators: [ Validators.required ]})
     });
+
+  }
+
+  onFileSelected(event: Event) {
+
+    console.log('file selected');
+    const file = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    this.form.patchValue({
+      image: file
+    });
+
+    this.form.get('image').updateValueAndValidity();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+    this.imagePreview = reader.result;
+    };
 
   }
 
@@ -44,7 +63,7 @@ export class PostCreateComponent implements OnInit {
     const newPost: Post = {
       _id: '',
       title: this.form.value.title,
-      content: this.form.value.content
+      content: this.form.value.content,
     };
 
     this.isLoading = true;

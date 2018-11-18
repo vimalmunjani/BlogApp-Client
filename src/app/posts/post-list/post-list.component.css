@@ -1,6 +1,8 @@
 .body-1 {
+    margin-top: 15rem;
+    font-size: 2rem;
     text-align: center;
-    color: darkslategray;
+    color: lightgrey;
 }
 
 mat-spinner {
