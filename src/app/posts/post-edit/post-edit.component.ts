@@ -68,7 +68,7 @@ export class PostEditComponent implements OnInit {
         this.router.navigate(['']);
       } else {
         this.isLoading = false;
-        this.snackBar.open('Error adding Post', 'OK', {
+        this.snackBar.open('Error Updating Post', 'OK', {
           duration: 2000,
         });
         return;

@@ -1,9 +1,11 @@
 <mat-toolbar color="primary">
   <span>
-    <button [routerLink]="['']" mat-flat-button color="primary">MyBlog</button>
+    <button class="nav-header" [routerLink]="['']" mat-flat-button color="primary">MyBlog</button>
     <!-- <a [routerLink] = "['']"> MyBlog </a>  -->
   </span>
+
   <span class="spacer"></span>
+  
   <ul>
     <button mat-button [routerLink]="['create']" 
     routerLinkActive = "mat-accent" >Write New Post</button>
