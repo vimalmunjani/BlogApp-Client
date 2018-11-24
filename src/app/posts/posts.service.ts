@@ -33,8 +33,9 @@ export class PostsService {
     return this.updatedPosts.asObservable();
   }
 
-  addPost(post: Post) {
+  addPost(post) {
 
+    console.log('post', post);
    return this.http.post<{ status: number, message: string, data: Post}>('http://localhost:3000/api/post', post);
 
     // this.postList.push(post);

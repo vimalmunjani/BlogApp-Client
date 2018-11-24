@@ -28,7 +28,7 @@ export class PostCreateComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, { validators: [ Validators.required]}),
       content: new FormControl(null, { validators: [ Validators.required ]}),
-      image: new FormControl(null, { validators: [ Validators.required ]})
+      image: new FormControl(null, { validators: [ ]})
     });
 
   }
@@ -36,14 +36,15 @@ export class PostCreateComponent implements OnInit {
   onFileSelected(event: Event) {
 
     console.log('file selected');
+
     const file = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
+
     this.form.patchValue({
       image: file
     });
-
     this.form.get('image').updateValueAndValidity();
 
+    const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
     this.imagePreview = reader.result;
@@ -60,11 +61,20 @@ export class PostCreateComponent implements OnInit {
       return;
     }
 
-    const newPost: Post = {
-      _id: '',
-      title: this.form.value.title,
-      content: this.form.value.content,
-    };
+    // const newPost1 = {
+    //   _id: '',
+    //   title: this.form.value.title,
+    //   content: this.form.value.content,
+    //   image: this.form.value.image
+    // };
+
+    const newPost = new FormData();
+    newPost.append('title', this.form.value.title);
+    newPost.append('content', this.form.value.content);
+    newPost.append('image', this.form.value.image, this.form.value.title);
+
+    console.log('new Post' , JSON.stringify(newPost));
+
 
     this.isLoading = true;
     this.postsService.addPost(newPost).subscribe((res) => {

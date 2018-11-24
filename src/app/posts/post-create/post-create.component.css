@@ -30,16 +30,25 @@ mat-spinner {
     margin: auto;
 }
 
-.imageContainer {
-    position: relative;
-    width: 700px;
-    max-width: 700px;
-    height: auto;
-    margin: 0rem auto;
-    /* border: 1px solid darkslategray; */
-    box-sizing: border-box;
+.imagePreview {
+    
+    /* max-width: 100%;
+    height: auto; */
+
 }
 
+
+ .imageContainer {
+    position: relative;
+    width: 700px;
+    max-width: 500px;
+    height: auto;
+    margin: 0rem auto;
+    /* border: 1px solid darkslategray;  */
+    box-sizing: border-box;
+} 
+
+ 
 .filePickerButton {
     position: absolute;
     background-color: white;
