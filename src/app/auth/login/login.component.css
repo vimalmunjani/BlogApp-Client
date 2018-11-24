@@ -1,0 +1,23 @@
+mat-card {
+    margin:0 auto;
+    margin-top: 5%;
+    width: 45%;
+    /* height: 80%; */
+    padding: 3%;
+    box-sizing: border-box;
+}
+
+mat-form-field {
+    display: block;
+    width: 95%;
+    margin: 5% auto;
+    
+}
+
+button {
+    margin: 1%;
+}
+
+mat-spinner {
+    margin: auto;
+}

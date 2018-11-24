@@ -7,8 +7,20 @@
   <span class="spacer"></span>
   
   <ul>
-    <button mat-button [routerLink]="['create']" 
-    routerLinkActive = "mat-accent" >Write New Post</button>
+
+    <li>
+        <button mat-button [routerLink]="['create']" 
+        routerLinkActive = "mat-accent" >Write New Post</button>
+    </li>
+    <li>
+        <button mat-button [routerLink]="['login']" 
+        routerLinkActive = "mat-accent" >Log In</button>
+    </li>
+    <li>
+        <button mat-button [routerLink]="['signup']" 
+        routerLinkActive = "mat-accent" >Sign Up</button>
+    </li>
+    
     <!-- <li> <a [routerLink] = "['create']"> Write New Post </a> </li> -->
   </ul>
 </mat-toolbar>

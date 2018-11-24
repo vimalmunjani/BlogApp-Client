@@ -5,3 +5,7 @@
 .nav-header {
     font-size: 1.5rem;
 }
+
+ul {
+    display: flex;
+}
