@@ -9,3 +9,7 @@
 ul {
     display: flex;
 }
+
+.nav-link {
+    font-size: 1rem;
+}

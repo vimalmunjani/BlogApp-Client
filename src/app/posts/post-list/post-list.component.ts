@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-post-list',
@@ -13,18 +14,31 @@ export class PostListComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   // @Input('posts') postList: Post[] = [];
   postList: Post[] = [];
-  postsSub: Subscription;
+  posts$: Subscription;
   isLoading = false;
 
-  constructor(private postsService: PostsService) { }
+  private isLoggedIn = false;
+  private authStatus$: Subscription;
+
+  constructor(private postsService: PostsService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.isLoading = true;
+
     this.postsService.getPosts();
-    this.postsSub = this.postsService.getUpdatedPosts().subscribe((posts: Post[]) => {
+
+    this.posts$ = this.postsService.getUpdatedPosts().subscribe((posts: Post[]) => {
       this.postList = posts;
       this.isLoading = false;
     });
+
+    this.isLoggedIn = this.auth.getLogInState();
+
+    this.authStatus$ = this.auth.getAuthState().subscribe((loginStatus) => {
+      this.isLoggedIn = loginStatus;
+    });
+
   }
 
   deletePost(postId: string) {
@@ -32,7 +46,8 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.postsSub.unsubscribe();
+    this.posts$.unsubscribe();
+    this.authStatus$.unsubscribe();
   }
 
 }

@@ -14,7 +14,7 @@
     </mat-expansion-panel-header>
     {{ post.content }}
 
-    <mat-action-row>
+    <mat-action-row *ngIf = "isLoggedIn" >
         <button mat-button [routerLink] = "['edit', post._id]" >EDIT</button>
         <button mat-button color="warn"  (click) = "deletePost(post._id)" >DELETE</button>
     </mat-action-row>

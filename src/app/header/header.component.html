@@ -8,19 +8,21 @@
   
   <ul>
 
-    <li>
-        <button mat-button [routerLink]="['create']" 
+    <li *ngIf = "isLoggedIn" >
+        <button class = "nav-link" mat-button [routerLink]="['create']" 
         routerLinkActive = "mat-accent" >Write New Post</button>
     </li>
-    <li>
-        <button mat-button [routerLink]="['login']" 
+    <li *ngIf = "!isLoggedIn" >
+        <button class = "nav-link" mat-button [routerLink]="['login']" 
         routerLinkActive = "mat-accent" >Log In</button>
     </li>
-    <li>
-        <button mat-button [routerLink]="['signup']" 
+    <li *ngIf = "!isLoggedIn" >
+        <button class = "nav-link" mat-button [routerLink]="['signup']" 
         routerLinkActive = "mat-accent" >Sign Up</button>
     </li>
+    <li *ngIf = "isLoggedIn" >
+      <button class = "nav-link" (click) = "onLogOut()" mat-button>Log Out</button>
+    </li>
     
-    <!-- <li> <a [routerLink] = "['create']"> Write New Post </a> </li> -->
   </ul>
 </mat-toolbar>

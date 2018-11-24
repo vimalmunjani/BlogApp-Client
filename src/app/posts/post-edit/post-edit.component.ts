@@ -26,7 +26,8 @@ export class PostEditComponent implements OnInit {
     this.post = {
       _id: this.postID,
       title: '',
-      content: ''
+      content: '',
+      imageURL: ''
     };
 
 
@@ -56,7 +57,8 @@ export class PostEditComponent implements OnInit {
     const updatedPost: Post = {
       _id: this.postID,
       title: form.value.postTitle,
-      content: form.value.postContent
+      content: form.value.postContent,
+      imageURL: ''
     };
 
     this.isLoading = true;

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { AuthService } from '../auth.service';
+import { AuthData } from '../models/auth-data.model';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,8 @@ import { MatSnackBar } from '@angular/material';
 export class LoginComponent implements OnInit {
 
   isLoading: boolean;
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.isLoading = false;
@@ -25,7 +28,36 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    console.log('form', form.value);
+    const authData: AuthData = {
+      email: form.value.email,
+      password: form.value.password
+    };
+
+    this.isLoading = true;
+    this.authService.logIn(authData).subscribe((response) => {
+
+    this.isLoading = false;
+
+      console.log('login response', response);
+
+      if (response.status === 200) {
+
+        this.snackBar.open('Login Successful', 'OK', {
+          duration: 2000,
+        });
+        return;
+
+      } else {
+
+        this.snackBar.open('Error Logging In', 'OK', {
+          duration: 2000,
+        });
+        return;
+
+      }
+
+    });
+
   }
 
 }
