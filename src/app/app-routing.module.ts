@@ -6,6 +6,7 @@ import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './auth/auth.guard';
+import { PostViewComponent } from './posts/post-view/post-view.component';
 
 const routes: Routes = [
     {
@@ -13,10 +14,15 @@ const routes: Routes = [
         component: PostListComponent
     },
     {
+        path: ':postID',
+        component: PostViewComponent,
+    },
+    {
         path: 'create',
         component: PostCreateComponent,
         canActivate: [AuthGuard]
     },
+
     {
         path: 'edit/:postID',
         component: PostEditComponent,
