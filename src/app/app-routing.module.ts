@@ -14,7 +14,7 @@ const routes: Routes = [
         component: PostListComponent
     },
     {
-        path: ':postID',
+        path: 'post/:postID',
         component: PostViewComponent,
     },
     {
@@ -22,7 +22,6 @@ const routes: Routes = [
         component: PostCreateComponent,
         canActivate: [AuthGuard]
     },
-
     {
         path: 'edit/:postID',
         component: PostEditComponent,
