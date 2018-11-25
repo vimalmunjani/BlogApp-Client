@@ -4,6 +4,7 @@ import { AuthData } from './models/auth-data.model';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,10 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   private apiURL = `http://localhost:3000/api/user/`;
-  private token: string;
+  // private token: string;
   private authStateListener = new Subject<boolean>();
-  private isLoggedIn = false;
+  // private isLoggedIn = false;
+  private helper = new JwtHelperService();
 
   constructor(private http: HttpClient,
               private router: Router) { }
@@ -32,8 +34,9 @@ export class AuthService {
 
     this.http.post<{status, message, token}>(logInURL, authData).subscribe(res => {
       if (res.token) {
-        this.token = res.token;
-        this.isLoggedIn = true;
+        this.saveToken(res.token);
+        // this.token = res.token;
+        // this.isLoggedIn = true;
         this.authStateListener.next(true);
         this.router.navigate(['/']);
       }
@@ -43,22 +46,49 @@ export class AuthService {
 
   }
 
-  getToken() {
-    return this.token;
-  }
-
   getAuthState() {
     return this.authStateListener.asObservable();
   }
 
   getLogInState() {
-    return this.isLoggedIn;
+
+    const token = this.getToken();
+    console.log('getting token', token);
+    // const decodeToken = this.helper.decodeToken(token);
+
+    if (!token) {
+      return false;
+      this.authStateListener.next(false);
+    }
+
+    const isTokenExpired = this.helper.isTokenExpired(token);
+
+    if (isTokenExpired) {
+      this.deleteToken();
+    }
+    this.authStateListener.next(!isTokenExpired);
+    return !isTokenExpired;
   }
 
   logOut() {
-    this.token = null;
-    this.isLoggedIn = false;
+    // this.token = null;
+    // this.isLoggedIn = false;
+    this.deleteToken();
     this.authStateListener.next(false);
     this.router.navigate(['/']);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  saveToken(token: string) {
+    console.log(`saving token - ${token}`);
+    console.log(`decoded token - ${JSON.stringify(this.helper.decodeToken(token))}`);
+    localStorage.setItem('token', token);
+  }
+
+  deleteToken() {
+    localStorage.removeItem('token');
   }
 }
